@@ -7,8 +7,6 @@ import org.openqa.selenium.remote.SessionId;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
-
 public class WebSeleniumNewVersion {
 
     public static void main(String[] args) throws MalformedURLException {
@@ -19,8 +17,6 @@ public class WebSeleniumNewVersion {
         String testURL = "https://www.saucedemo.com";
 
         System.out.println("\nSetting Capabilities.");
-
-
 
         ChromeOptions chromeOpts = new ChromeOptions();
         chromeOpts.setExperimentalOption("w3c", true);
@@ -114,7 +110,6 @@ public class WebSeleniumNewVersion {
         driver.quit();
 
     }
-
     private static boolean isTextPresent(RemoteWebDriver driver,String text) {
 
         boolean value = false;
@@ -131,13 +126,9 @@ public class WebSeleniumNewVersion {
         return value;
 
     }
-
     private static void sauceContext(RemoteWebDriver driver, String text)
     {
         ((JavascriptExecutor)driver).executeScript("sauce:context=" +text);
     }
-
-
-
 
 }
