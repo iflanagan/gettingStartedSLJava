@@ -4,11 +4,9 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
-import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
-import static org.testng.Assert.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
+
 
 
 public class WebSeleniumNewVersion {
