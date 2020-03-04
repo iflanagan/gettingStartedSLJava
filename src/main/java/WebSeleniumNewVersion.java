@@ -15,8 +15,8 @@ public class WebSeleniumNewVersion {
 
     public static void main(String[] args) throws MalformedURLException {
 
-        String username = "iflanagan";
-        String accessKey = "4513840c-236b-4045-86bd-88e0c0ebfb50";
+        String username = "<sauceUserName";
+        String accessKey = "<sauceAccessKey>";
         String actualTitle = "Swag Labs";
         String testURL = "https://www.saucedemo.com";
 
