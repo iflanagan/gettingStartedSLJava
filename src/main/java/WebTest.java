@@ -23,7 +23,9 @@ public class WebTest {
         String actualTitle = "Swag Labs";
         int delay = 5000;
 
-        
+        // this is a test comment
+
+        System.out.println("Starting to execute program now");
 
         // RDC on sauce: ondemand.us-west-1.saucelabs.com/wd/hub VDC ondemand.saucelabs.com:443/wd/hub
         String UNIFIED_PLATFORM_URL = "https://" +SAUCE_USERNAME+ ":" +SAUCE_ACCESS_KEY+ "@ondemand.saucelabs.com:443/wd/hub";
