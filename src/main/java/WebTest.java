@@ -16,8 +16,7 @@ public class WebTest {
 
     public static void main(String[] args) throws IOException {
 
-
-        String SAUCE_USERNAME = "<sauce_user>";
+        String SAUCE_USERNAME = "<sauce_username>";
         String SAUCE_ACCESS_KEY = "<sauce_access_key>";
         String TestURL = "https://www.saucedemo.com/";
         String actualTitle = "Swag Labs";

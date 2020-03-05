@@ -4,10 +4,11 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class WebSeleniumNewVersion {
+public class MaskPasswordinSauce {
 
     public static void main(String[] args) throws MalformedURLException {
 
@@ -52,13 +53,13 @@ public class WebSeleniumNewVersion {
             sauceContext(driver, "Go to URl.");
             driver.navigate().to(testURL);
 
-         //   sauceContext(driver, "Get the title");
+            //   sauceContext(driver, "Get the title");
             String title = driver.getTitle();
 
             // Starting test here
 
             PageObjects page = new PageObjects();
-           driver.findElementById(page.userInput).sendKeys(page.username);
+            driver.findElementById(page.userInput).sendKeys(page.username);
             JavascriptExecutor js = (JavascriptExecutor) driver;
             //Disable logging
             js.executeScript("sauce:disable log");
@@ -67,23 +68,23 @@ public class WebSeleniumNewVersion {
             driver.findElementByCssSelector(page.loginButtoon).click();
             driver.findElementByCssSelector(page.hamburgerIcon).click();
 
-           sauceContext(driver, "Perform Validation");
-           boolean value = isTextPresent(driver,"Logout");
+            sauceContext(driver, "Perform Validation");
+            boolean value = isTextPresent(driver,"Logout");
 
-           if (value)
-           {
-               System.out.println("Login Passed.");
-               sauceContext(driver, "Login Passed.");
-               sauce.jobFailed(currentSessionID);
-           }
-           else
-           {
-               System.out.println("Login Failed.");
-               sauceContext(driver, "Login Failed.");
-               sauce.jobFailed(currentSessionID);
-           }
+            if (value)
+            {
+                System.out.println("Login Passed.");
+                sauceContext(driver, "Login Passed.");
+                sauce.jobFailed(currentSessionID);
+            }
+            else
+            {
+                System.out.println("Login Failed.");
+                sauceContext(driver, "Login Failed.");
+                sauce.jobFailed(currentSessionID);
+            }
 
-           driver.findElementByCssSelector(page.logoutLink).click();
+            driver.findElementByCssSelector(page.logoutLink).click();
 
 
 
@@ -107,20 +108,20 @@ public class WebSeleniumNewVersion {
         catch (Exception ex)
         {
             System.out.println("Can't execute script on SauceLabs: " +ex);
-         //   sauceContext(driver, "Can't execute script on SauceLabs");
+            //   sauceContext(driver, "Can't execute script on SauceLabs");
         }
 
         sauceContext(driver, "Quit Driver");
         driver.quit();
-
     }
+
     private static boolean isTextPresent(RemoteWebDriver driver,String text) {
 
         boolean value = false;
 
         try{
-             value = driver.getPageSource().contains(text);
-             value = true;
+            value = driver.getPageSource().contains(text);
+            value = true;
         }
         catch(Exception e){
 
