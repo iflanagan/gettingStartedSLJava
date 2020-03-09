@@ -7,13 +7,14 @@ import org.openqa.selenium.remote.SessionId;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.rmi.server.RemoteObject;
 
 public class MaskPasswordinSauce {
 
     public static void main(String[] args) throws MalformedURLException {
 
-        String username = "<sauceUSername>";
-        String accessKey = "<saucepassword>";
+        String username = "<sauceuser>";
+        String accessKey = "<sauceaccesskey>";
         String actualTitle = "Swag Labs";
         String testURL = "https://www.saucedemo.com";
 
@@ -58,15 +59,15 @@ public class MaskPasswordinSauce {
             String title = driver.getTitle();
 
             // Starting test here
-            JavascriptExecutor js = (JavascriptExecutor) driver;
             PageObjects page = new PageObjects();
-            js.executeScript("sauce: disable log");
+            setSauceLabeLogging(driver, "sauce: disable log");
             driver.findElementById(page.userInput).sendKeys(page.username);
-            js.executeScript("sauce: enable log");
+            setSauceLabeLogging(driver, "sauce: enable log");
 
             //Disable logging
-        //    js.executeScript("sauce:disable log");
+            setSauceLabeLogging(driver, "sauce: disable log");
             driver.findElementById(page.passwordInput).sendKeys(page.password);
+            setSauceLabeLogging(driver, "sauce: enable log");
         //    js.executeScript("sauce:enable log");
             driver.findElementByCssSelector(page.loginButtoon).click();
             driver.findElementByCssSelector(page.hamburgerIcon).click();
@@ -138,5 +139,14 @@ public class MaskPasswordinSauce {
     {
         ((JavascriptExecutor)driver).executeScript("sauce:context=" +text);
     }
+    private static void setSauceLabeLogging(RemoteWebDriver driver, String command)
+    {
+        // command = sauce: disable log TOOENABLE = sauce: enable log
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript(command);
+
+    }
+
+
 
 }

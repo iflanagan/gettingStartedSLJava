@@ -59,11 +59,11 @@ public class WebSeleniumNewVersion {
 
             PageObjects page = new PageObjects();
            driver.findElementById(page.userInput).sendKeys(page.username);
-            JavascriptExecutor js = (JavascriptExecutor) driver;
+        //    JavascriptExecutor js = (JavascriptExecutor) driver;
             //Disable logging
-            js.executeScript("sauce: disable log");
+        //    js.executeScript("sauce: disable log");
             driver.findElementById(page.passwordInput).sendKeys(page.password);
-            js.executeScript("sauce: enable log");
+        //    js.executeScript("sauce: enable log");
             driver.findElementByCssSelector(page.loginButtoon).click();
             driver.findElementByCssSelector(page.hamburgerIcon).click();
 
