@@ -33,12 +33,12 @@ public class WebTest {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platform", "Windows 10");
-        capabilities.setCapability("tag", "DesktopWebExample");
-        capabilities.setCapability("name", "Desktop_Web_test_SL");
+      //  capabilities.setCapability("tag", "DesktopWebExample");
+     //   capabilities.setCapability("name", "Desktop_Web_test_SL");
         capabilities.setCapability("browserName", "Chrome");
         capabilities.setCapability("version", "latest");
-        capabilities.setCapability("extendedDebugging", true);
-        capabilities.setCapability("build", 1);
+     //   capabilities.setCapability("extendedDebugging", true);
+     //   capabilities.setCapability("build", 1);
       //  capabilities.setCapability("TunnelIdentifier", "<yourTunnelId>"); // need to have a tunnel setup first otherwise comment out
 
         SauceREST sauce = new SauceREST(SAUCE_USERNAME, SAUCE_ACCESS_KEY, "US West 1");
@@ -52,24 +52,24 @@ public class WebTest {
 
         try
         {
-            sauceContext(driver, "Starting web Test Now");
-            sauceContext(driver, "Loading URL");
+     //       sauceContext(driver, "Starting web Test Now");
+     //       sauceContext(driver, "Loading URL");
             driver.get(TestURL);
-           sauceContext(driver, "Attempting to get the title");
+     //      sauceContext(driver, "Attempting to get the title");
             String currentTitle = driver.getTitle();
-            sauceContext(driver, "Perform validation and determine if current title equals title");
+    //        sauceContext(driver, "Perform validation and determine if current title equals title");
 
             if (currentTitle.equals(actualTitle))
             {
           //      sauceContext(driver, "Title Verification Test Passed");
                 System.out.println("Test Passed.");
-                sauce.jobPassed(currentSessionID);
+        //        sauce.jobPassed(currentSessionID);
             }
             else
             {
             //    sauceContext(driver, "Title Verification Test Failed");
                 System.out.println("Test Failed");
-                sauce.jobFailed(currentSessionID);
+           //     sauce.jobFailed(currentSessionID);
             }
         }
         catch (Exception ex)
