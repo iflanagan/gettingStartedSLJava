@@ -1,0 +1,81 @@
+import com.saucelabs.saucerest.SauceREST;
+import java.io.File;
+import java.io.IOException;
+
+public class SauceUtils {
+
+    private static String sauceUsername = null;
+    private static String sauceAccessKey = null;
+    private static String sauceDC = "US West 1";
+    private static SauceREST sauce = null;
+    private static  SauceREST myrestclient;
+    private static String restURL = "https://api.us-west-1.saucelabs.com/v1/rdc/apps/upload";
+
+    public boolean uploadToSauceStorage(String sauceUsername, String sauceAccessKey, String filenamepath, String newfileName) throws IOException {
+
+        boolean isuploaded = false;
+
+        /*note for the String filenamepath variable it should be the full file location on your system
+        newfileName will be the name of the file     */
+
+        File file = new File(filenamepath);
+
+        if (file.exists())
+        {
+            isuploaded = checkFileInSauceStorage(newfileName,sauceUsername, sauceAccessKey);
+
+            if (isuploaded)
+            {
+                System.out.println("uploadToSauceStorage() file: " +newfileName+ " has already been uploaded to sauce storage");
+            }
+            else {
+
+                System.out.println("\nuploadToSauceStorage() file :" +newfileName+  " is not in sauce storage, lets upload it now");
+                myrestclient = createSauceRestClient(sauceUsername, sauceAccessKey);
+                myrestclient.uploadFile(file);
+
+                isuploaded = checkFileInSauceStorage(newfileName,sauceUsername, sauceAccessKey);
+
+                if (isuploaded)
+                {
+                    System.out.println("\nuploadToSauceStorage() file: " +newfileName+ " was uploaded to sauce storage");
+                    isuploaded = true;
+                } else
+                {
+                    System.out.println("\nuploadToSauceStorage() file: " +newfileName+ " was not uploaded to sauce storage");
+                }
+            }
+        }
+        else
+        {
+            System.out.println("\nuploadToSauceStorage() file: " +filenamepath+ " doesnt exist");
+        }
+        return isuploaded;
+    }
+
+    private static SauceREST createSauceRestClient(String sauceUsername, String sauceAccessKey)
+    {
+        SauceREST sauce = new SauceREST(sauceUsername, sauceAccessKey, sauceDC);
+        return sauce;
+    }
+
+    public boolean checkFileInSauceStorage(String newfilename, String sauceUsername, String sauceAccessKey)
+    {
+        System.out.println("\ncalling checkFileInSauceStorage() method now");
+        SauceREST myrestclient;
+        boolean isUploaded = false;
+        myrestclient = createSauceRestClient(sauceUsername, sauceAccessKey);
+        myrestclient.getStoredFiles();
+        String myfiles = myrestclient.getStoredFiles();
+
+        if (myfiles.contains(newfilename))
+        {
+         //   System.out.println("\ncheckFileInSauceStorage() file: " +newfilename+ " exists in sauce storage");
+            System.out.println("\ncheckFileInSauceStorage() uploaded files: " +myfiles);
+            isUploaded = true;
+        }
+
+      return isUploaded;
+    }
+
+}
