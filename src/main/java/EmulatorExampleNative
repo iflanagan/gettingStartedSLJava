@@ -1,0 +1,111 @@
+import com.saucelabs.saucerest.SauceREST;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.SessionId;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.IOException;
+import java.net.URL;
+
+public class EmulatorExampleNative {
+
+    public static void main(String[] args) throws IOException {
+
+        String SAUCE_USERNAME = Constants.sauceUsersName;
+        String SAUCE_ACCESS_KEY = Constants.sauceAccessKey;
+        int delay = 5000;
+        String myFile = Constants.myFile;
+        String mynewFile = Constants.mynewFile;
+        boolean isuploaded = false;
+
+        // this is a test comment
+        SauceUtils utils = new SauceUtils();
+        isuploaded = utils.uploadToSauceStorage(Constants.sauceUsersName, Constants.sauceAccessKey,myFile, mynewFile);
+
+        System.out.println("Starting to execute the emulator addition test now");
+        String UNIFIED_PLATFORM_URL = Constants.UNIFIED_PLATFORM_URL;
+         URL url = new URL(UNIFIED_PLATFORM_URL);
+
+        // use platform configurator https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
+        System.out.println("Defining capabilities");
+        DesiredCapabilities caps = DesiredCapabilities.android();
+        caps.setCapability("appiumVersion", Constants.appiumVersion);
+        caps.setCapability("deviceName","Android GoogleAPI Emulator");
+        caps.setCapability("deviceOrientation", "portrait");
+        caps.setCapability("browserName", "");
+        caps.setCapability("platformVersion","7.1");
+        caps.setCapability("platformName","Android");
+        caps.setCapability("tag", "Emulator_native");
+        caps.setCapability("name", "Emulator_native");
+        caps.setCapability("app","sauce-storage:Calculator.apk");
+
+        System.out.println("Create an instance of the driver");
+        AndroidDriver<WebElement> driver = new AndroidDriver<WebElement>(url, caps);
+
+        // create an instance of the sauce rest client
+        System.out.println("create an instance of the sauce rest client");
+        SauceREST sauce = new SauceREST(SAUCE_USERNAME, SAUCE_ACCESS_KEY, "US West 1");
+
+        // get the sesssion ID
+        System.out.println("get the sesssion ID");
+        SessionId session = ((RemoteWebDriver)driver).getSessionId();
+        String currentSessionID = session.toString();
+        System.out.println("Session id: " +currentSessionID);
+
+        try
+
+        {
+            sauceContext(driver, "Capture the objects");
+            /* Get the elements. */
+            MobileElement buttonTwo = (MobileElement)(driver.findElement(By.id("net.ludeke.calculator:id/digit2")));
+            MobileElement buttonPlus = (MobileElement)(driver.findElement(By.id("net.ludeke.calculator:id/plus")));
+            MobileElement buttonEquals = (MobileElement)(driver.findElement(By.id("net.ludeke.calculator:id/equal")));
+            MobileElement resultField = (MobileElement)(driver.findElement(By.xpath("//android.widget.EditText[1]")));
+
+            /* Add two and two. */
+            sauceContext(driver, "Click button two");
+            buttonTwo.click();
+            sauceContext(driver, "Click plus button");
+            buttonPlus.click();
+            sauceContext(driver, "Click button two");
+            buttonTwo.click();
+            sauceContext(driver, "Click equals button");
+            buttonEquals.click();
+
+            /* Check if within given time the correct result appears in the designated field. */
+            sauceContext(driver, "Check if within given time the correct result (number 4) appears in the designated field.");
+           boolean value =  (new WebDriverWait(driver, 30)).until(ExpectedConditions.textToBePresentInElement(resultField, "4"));
+           System.out.println("Result of test is: " +value);
+
+           if (value)
+           {
+               System.out.println("Calculator Addition Test Passed");
+               sauceContext(driver, "Calculator Addition Test Passed");
+               sauce.jobPassed(currentSessionID);
+
+           }
+           else
+           {
+               System.out.println("Calculator Addition Test Failed");
+               sauceContext(driver, "Calculator Addition Test Failed");
+               sauce.jobFailed(currentSessionID);
+           }
+        }
+        catch(Exception ex)
+        {
+            System.out.println("can't run Emulator native test" +ex);
+        }
+        driver.quit();
+    }
+
+    private static void sauceContext(RemoteWebDriver driver, String text)
+    {
+        ((JavascriptExecutor)driver).executeScript("sauce:context=" +text);
+    }
+}
