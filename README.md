@@ -35,6 +35,24 @@ at the top click on build project
 
 Note there should be no errors.
 
+Steps to run EmulatorExampleNative.java file
+
+-Download the Calculator_2.0.apk app
+
+-change the following line in the Constants class 
+
+public static String myFile = "/Users/ianflanagan/Downloads/Calculator_2.0.apk";
+
+to point to where you downloaded the file.
+
+-set your sauceusername and sauceaccesskey in the Constants.java file
+
+-right click in intellig and run the program
+
+MORE information on how to run tests on emulators/simulators on the sauce platform can be found here
+
+https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
+
 
 
 
