@@ -1,7 +1,0 @@
-public class Constants {
-
-    public static String sauceUsersName = "<sauceusername>";
-    public static String sauceAccessKey = "<yoursauceaccesskey";
-    public static String myFile = "/Users/ianflanagan/Downloads/Calculator_2.0.apk";
-    public static String mynewFile = "Calculator_2.0.apk";
-}
