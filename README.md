@@ -51,7 +51,7 @@ to point to where you downloaded the file.
 
 MORE information on how to run tests on emulators/simulators on the sauce platform can be found here
 
-https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
+https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/ (click on appium and then select emulator/simulator)
 
 
 
