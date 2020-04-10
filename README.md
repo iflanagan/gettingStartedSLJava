@@ -1,7 +1,9 @@
 Pre-requisities:
 
 Java 1.8
+
 maven plugin for intellij
+
 valid sauce labs account
 
 mkdir <yourdirectoryname>
