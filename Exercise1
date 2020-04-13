@@ -1,0 +1,17 @@
+
+Open the webTest.java class and set your sauce credentials below
+
+
+ String SAUCE_USERNAME = "<yoursauceUsername";
+ String SAUCE_ACCESS_KEY = "<yourSauceAccessKey>";
+ 
+ right click in the class and click 'Run WebTest.Main()'
+ 
+ Login to saucelabs.com
+ click on dashboard 
+ click on 'Automated Tests'
+ see your job running
+ 
+ 
+ 
+ 
