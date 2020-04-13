@@ -5,12 +5,47 @@ Open the webTest.java class and set your sauce credentials below
  String SAUCE_USERNAME = "<yoursauceUsername";
  String SAUCE_ACCESS_KEY = "<yourSauceAccessKey>";
  
+ <Steps>
  right click in the class and click 'Run WebTest.Main()'
- 
  Login to saucelabs.com
  click on dashboard 
  click on 'Automated Tests'
  see your job running
+ when you job finishes click on metadata and look for the line that we uncommented to see it manifest in the meta data report
+ </Steps>
+  
+ Uncomment out this line
+   //   capabilities.setCapability("name", "Desktop_Web_test_SL");
+ Run all steps as outline in <Steps> above   
+ 
+ Uncomment out this line
+ //  capabilities.setCapability("tag", "DesktopWebExample");
+ Run all steps as outline in <Steps> above   
+ 
+ Uncomment out this line
+  //   capabilities.setCapability("extendedDebugging", true);
+   Run all steps as outline in <Steps> above   
+   NOTE: at the bottom of the meta link page search for 'har file'
+   
+ Uncomment out this line
+ //   capabilities.setCapability("build", 1);
+  Run all steps as outline in <Steps> above 
+  
+  Uncomment any line that has the text 'sauceContext'
+  Run all steps as outline in <Steps> above 
+  Text should appear in the report steps
+  
+  Uncomment out these two lines that contain the following text:
+  
+  sauce.jobFailed
+  sauce.jobPassed
+  Run all steps as outline in <Steps> above 
+  Test report should have a check next to it (for passed) or ! for failed.
+  
+  
+  
+  
+  
  
  
  
