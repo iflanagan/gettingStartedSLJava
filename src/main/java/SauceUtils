@@ -1,4 +1,7 @@
 import com.saucelabs.saucerest.SauceREST;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.SessionId;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -10,6 +13,7 @@ public class SauceUtils {
     private static SauceREST sauce = null;
     private static  SauceREST myrestclient;
     private static String restURL = "https://api.us-west-1.saucelabs.com/v1/rdc/apps/upload";
+    private static RemoteWebDriver driver;
 
     public boolean uploadToSauceStorage(String sauceUsername, String sauceAccessKey, String filenamepath, String newfileName) throws IOException {
 
@@ -76,6 +80,44 @@ public class SauceUtils {
         }
 
       return isUploaded;
+    }
+    public String getReportURL(String sessionId)
+    {
+        String reportURL = null;
+
+        try
+        {
+          //  String currentSessionId = getSessionID();
+            reportURL = "https://app.saucelabs.com/tests/"+sessionId;
+            System.out.println("Report URL is: " +reportURL);
+        }
+        catch (Exception ex)
+        {
+            System.out.println("Can't get report URL: " +ex.getMessage());
+        }
+
+        return reportURL;
+    }
+    private String getSessionID()
+    {
+        System.out.println("Obtain the sessionId");
+        String sessionID = null;
+
+        try
+        {
+            SessionId session = ((RemoteWebDriver)driver).getSessionId();
+            sessionID = session.toString();
+            System.out.println("Session id: " +sessionID);
+        }
+        catch (Exception ex)
+        {
+            System.out.println("Can't obtain the sessionId" +ex.getMessage());
+        }
+
+        return sessionID;
+
+
+
     }
 
 }
