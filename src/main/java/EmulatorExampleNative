@@ -109,6 +109,7 @@ public class EmulatorExampleNative {
         }
 
         System.out.println("Test finished, check sauce dashboard for results");
+        utils.getReportURL(currentSessionID);
         driver.quit();
     }
 
