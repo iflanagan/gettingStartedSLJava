@@ -43,7 +43,7 @@ public class EmulatorExampleNative {
         caps.setCapability("platformName","Android");
         caps.setCapability("tag", "Emulator_native");
         caps.setCapability("name", "Emulator_native");
-        caps.setCapability("app","sauce-storage:Calculator.apk");
+        caps.setCapability("app","sauce-storage:Calculator_2.0.apk");
 
         System.out.println("Create an instance of the driver");
         AndroidDriver<WebElement> driver = new AndroidDriver<WebElement>(url, caps);
@@ -62,6 +62,7 @@ public class EmulatorExampleNative {
 
         {
             sauceContext(driver, "Capture the objects");
+            System.out.println("Lets capture the objects shall we?");
             /* Get the elements. */
             MobileElement buttonTwo = (MobileElement)(driver.findElement(By.id("net.ludeke.calculator:id/digit2")));
             MobileElement buttonPlus = (MobileElement)(driver.findElement(By.id("net.ludeke.calculator:id/plus")));
@@ -70,16 +71,21 @@ public class EmulatorExampleNative {
 
             /* Add two and two. */
             sauceContext(driver, "Click button two");
+            System.out.println("Click button two");
             buttonTwo.click();
             sauceContext(driver, "Click plus button");
+            System.out.println("Click plus button");
             buttonPlus.click();
             sauceContext(driver, "Click button two");
+            System.out.println("Click button two");
             buttonTwo.click();
             sauceContext(driver, "Click equals button");
+            System.out.println("Click equals button");
             buttonEquals.click();
 
             /* Check if within given time the correct result appears in the designated field. */
             sauceContext(driver, "Check if within given time the correct result (number 4) appears in the designated field.");
+            System.out.println("Check if within given time the correct result (number 4) appears in the designated field.");
            boolean value =  (new WebDriverWait(driver, 30)).until(ExpectedConditions.textToBePresentInElement(resultField, "4"));
            System.out.println("Result of test is: " +value);
 
@@ -101,6 +107,8 @@ public class EmulatorExampleNative {
         {
             System.out.println("can't run Emulator native test" +ex);
         }
+
+        System.out.println("Test finished, check sauce dashboard for results");
         driver.quit();
     }
 
